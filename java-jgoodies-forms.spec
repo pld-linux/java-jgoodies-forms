@@ -4,24 +4,34 @@
 # Conditional build:
 %bcond_without	javadoc		# don't build javadoc
 
+%if "%{pld_release}" == "ti"
+%bcond_without	java_sun	# build with gcj
+%else
+%bcond_with	java_sun	# build with java-sun
+%endif
+
 %define		shortname forms
 %define		srcname		jgoodies-%{shortname}
 %define		ver	%(echo %{version} | tr . _)
+%include	/usr/lib/rpm/macros.java
 Summary:	Framework to lay out and implement elegant Swing panels in Java
 Name:		java-jgoodies-forms
 Version:	1.2.0
-Release:	1
+Release:	2
 License:	BSD
-Group:		Development/Libraries
+Group:		Libraries/Java
 URL:		http://www.jgoodies.com/freeware/forms/
 Source0:	http://www.jgoodies.com/download/libraries/%{shortname}/%{shortname}-%{ver}.zip
 # Source0-md5:	756de0bee840592cdc12ef0cd5d8332e
 Patch0:		build.patch
 BuildRequires:	ant
+%{!?with_java_sun:BuildRequires:	java-gcj-compat-devel}
+%{?with_java_sun:BuildRequires:	java-sun}
+BuildRequires:	jpackage-utils >= 1.6
+BuildRequires:	rpm >= 4.4.9-56
+BuildRequires:	rpm-javaprov
+BuildRequires:	rpmbuild(macros) >= 1.533
 BuildRequires:	sed >= 4.0
-BuildRequires:	jdk >= 0:1.4
-BuildRequires:	jpackage-utils >= 0:1.6
-Requires:	java >= 0:1.4
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -49,6 +59,25 @@ the hard stuff possible, the good design easy and the bad difficult.
 
 This package contains the Javadoc documentation for JGoodies Forms.
 
+%package doc
+Summary:	Manual for %{srcname}
+Summary(fr.UTF-8):	Documentation pour %{srcname}
+Summary(it.UTF-8):	Documentazione di %{srcname}
+Summary(pl.UTF-8):	Podręcznik dla %{srcname}
+Group:		Documentation
+
+%description doc
+Documentation for %{srcname}.
+
+%description doc -l fr.UTF-8
+Documentation pour %{srcname}.
+
+%description doc -l it.UTF-8
+Documentazione di %{srcname}.
+
+%description doc -l pl.UTF-8
+Dokumentacja do %{srcname}.
+
 %package demo
 Summary:	Demo for %{srcname}
 Summary(pl.UTF-8):	Pliki demonstracyjne dla pakietu %{srcname}
@@ -63,6 +92,7 @@ Pliki demonstracyjne i przykłady dla pakietu %{srcname}.
 
 %prep
 %setup -q -n %{shortname}-%{version}
+%undos build.xml
 %patch0 -p1
 rm %{shortname}-%{version}.jar
 rm -r docs/api
@@ -108,9 +138,13 @@ ln -nfs %{srcname}-%{version} %{_javadocdir}/%{srcname}
 
 %files
 %defattr(644,root,root,755)
-%doc RELEASE-NOTES.txt LICENSE.txt README.html docs
+%doc RELEASE-NOTES.txt LICENSE.txt README.html
 %{_javadir}/%{srcname}-%{version}.jar
 %{_javadir}/%{srcname}.jar
+
+%files doc
+%defattr(644,root,root,755)
+%doc docs/*
 
 %files demo
 %defattr(644,root,root,755)
