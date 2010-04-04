@@ -1,0 +1,36 @@
+--- forms-1.0.7/build.xml.orig	2007-04-12 10:43:01.000000000 +0200
++++ forms-1.0.7/build.xml	2007-04-12 11:02:21.000000000 +0200
+@@ -118,8 +118,7 @@
+ 			optimize     ="${build.compile.optimize}"
+             source       ="${build.compile.source}"
+ 			target       ="${build.compile.target}"
+-			verbose      ="${build.compile.verbose}"
+-			bootclasspath="${build.boot.classpath}" />
++                        verbose      ="${build.compile.verbose}"/>
+ 	</target>
+ 	
+     <!-- ***************************************************************** -->
+@@ -139,7 +138,6 @@
+             source       ="${build.compile.source}"
+ 			target       ="${build.compile.target}"
+ 			verbose      ="${build.compile.verbose}"
+-			bootclasspath="${build.boot.classpath}"
+ 			classpathref ="classpath.core" />
+ 	</target>
+ 	
+@@ -182,7 +180,6 @@
+             source       ="${build.compile.source}"
+ 			target       ="${build.compile.target}"
+ 			verbose      ="${build.compile.verbose}"
+-			bootclasspath="${build.boot.classpath}"
+ 			classpathref ="classpath.tutorial" />
+ 	</target>
+ 
+@@ -202,7 +199,6 @@
+             author="true" 
+             version="true" 
+             use="true" 
+-            link="${javadoc.link}"
+             overview="${javadoc.overview}"
+             windowtitle="${Name} ${spec.version} API" 
+             doctitle="${Name} ${spec.version} API"
