@@ -1,5 +1,3 @@
-# TODO
-# - 700k docs to subpackage?
 #
 # Conditional build:
 %bcond_without	javadoc		# don't build javadoc
@@ -17,7 +15,7 @@
 Summary:	Framework to lay out and implement elegant Swing panels in Java
 Name:		java-jgoodies-forms
 Version:	1.2.0
-Release:	2
+Release:	3
 License:	BSD
 Group:		Libraries/Java
 URL:		http://www.jgoodies.com/freeware/forms/
@@ -154,5 +152,5 @@ ln -nfs %{srcname}-%{version} %{_javadocdir}/%{srcname}
 %files javadoc
 %defattr(644,root,root,755)
 %{_javadocdir}/%{srcname}-%{version}
-%{_javadocdir}/%{srcname}
+%ghost %{_javadocdir}/%{srcname}
 %endif
