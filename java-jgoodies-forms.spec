@@ -2,12 +2,6 @@
 # Conditional build:
 %bcond_without	javadoc		# don't build javadoc
 
-%if "%{pld_release}" == "ti"
-%bcond_without	java_sun	# build with gcj
-%else
-%bcond_with	java_sun	# build with java-sun
-%endif
-
 %define		shortname forms
 %define		srcname		jgoodies-%{shortname}
 %define		ver	%(echo %{version} | tr . _)
@@ -23,10 +17,8 @@ Source0:	http://www.jgoodies.com/download/libraries/%{shortname}/%{shortname}-%{
 # Source0-md5:	756de0bee840592cdc12ef0cd5d8332e
 Patch0:		build.patch
 BuildRequires:	ant
-%{!?with_java_sun:BuildRequires:	java-gcj-compat-devel}
-%{?with_java_sun:BuildRequires:	java-sun}
+BuildRequires:	jdk
 BuildRequires:	jpackage-utils >= 1.6
-BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.533
 BuildRequires:	sed >= 4.0
