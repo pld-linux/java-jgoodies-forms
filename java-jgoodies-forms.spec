@@ -17,6 +17,7 @@ Source0:	http://www.jgoodies.com/download/libraries/%{shortname}/%{shortname}-%{
 # Source0-md5:	756de0bee840592cdc12ef0cd5d8332e
 Patch0:		build.patch
 BuildRequires:	ant
+BuildRequires:	iconv
 BuildRequires:	jdk
 BuildRequires:	jpackage-utils >= 1.6
 BuildRequires:	rpm-javaprov
