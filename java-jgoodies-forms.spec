@@ -5,7 +5,6 @@
 %define		shortname forms
 %define		srcname		jgoodies-%{shortname}
 %define		ver	%(echo %{version} | tr . _)
-%include	/usr/lib/rpm/macros.java
 Summary:	Framework to lay out and implement elegant Swing panels in Java
 Name:		java-jgoodies-forms
 Version:	1.2.0
