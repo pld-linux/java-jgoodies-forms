@@ -84,7 +84,7 @@ Pliki demonstracyjne i przykłady dla pakietu %{srcname}.
 %prep
 %setup -q -n %{shortname}-%{version}
 %undos build.xml
-%patch0 -p1
+%patch -P0 -p1
 rm %{shortname}-%{version}.jar
 rm -r docs/api
 
